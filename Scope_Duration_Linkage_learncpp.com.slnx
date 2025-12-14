@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Scope_Duration_Linkage_learncpp.com.vcxproj" />
+</Solution>
