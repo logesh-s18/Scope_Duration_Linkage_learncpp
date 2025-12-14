@@ -9,7 +9,7 @@ void print(std::string a);
 namespace smartPhone { namespace NEW {
 
 
-	void print(std::string a)
+	void printer(std::string a)
 	{
 
 		std::cout << "smartphone namespace NEW says '" << a << "'"  << '\n';
@@ -18,7 +18,7 @@ namespace smartPhone { namespace NEW {
 
 		::print(a); // access global print() function
 
-		//print(a);
+		print(a);
 
 
 
@@ -119,7 +119,7 @@ int main()
 							// Trying Commit Push with GIT commands
 
 
-	sP::print("Hi");
+	sP::printer("Hi");
 
 
 }
