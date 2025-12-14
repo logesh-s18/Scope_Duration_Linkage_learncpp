@@ -14,7 +14,39 @@ namespace smartPhone { namespace NEW {
 
 		std::cout << "smartphone namespace NEW says '" << a << "'"  << '\n';
 		
-		::print(a);	
+		//print(a);
+
+		::print(a); // access global print() function
+
+		//print(a);
+
+
+
+
+		//--------------WILL CAUSE RECURSION including global print() function -----------------------
+
+
+		/*		
+
+		::print(a);
+		print(a);
+
+		*/
+
+		
+
+
+		//---------------WILL CAUSE RECURSION excluding global print() function------------------------
+
+		/*
+
+		print(a);
+		::print(a);
+
+		*/
+
+		//------------------------------------------------------------------------------------
+		
 
 	}
 	void print_again()
