@@ -66,7 +66,7 @@ int main()
 	
 	
 	
-	 using namespace smartPhone::NEW;
+	using namespace smartPhone::NEW;
 
 	smartWatch::print("HI");
 
@@ -76,7 +76,8 @@ int main()
 							// byb default when there is no naming collision, then we dont need			
 							// to use :: for accessing global functions
 
-
+	
+							// Trying Commit Push with GIT commands
 
 
 
