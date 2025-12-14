@@ -70,11 +70,11 @@ int main()
 	
 	
 	
-	using namespace smartPhone::NEW;
+	namespace sP =  smartPhone::NEW;
 
-	smartWatch::print("HI");
+	//smartWatch::print("HI");
 
-	::print("HI");			// we need to explicitly say to the compiler that we are accessing an 
+	//::print("HI");			// we need to explicitly say to the compiler that we are accessing an 
 							// global function when it has duplicate names	
 							// if we just use just "print()", then compiler can't find which one
 							// byb default when there is no naming collision, then we dont need			
@@ -83,6 +83,8 @@ int main()
 	
 							// Trying Commit Push with GIT commands
 
+
+	sP::print("Hi");
 
 
 }
