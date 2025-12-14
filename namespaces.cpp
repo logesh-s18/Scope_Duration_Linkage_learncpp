@@ -14,8 +14,7 @@ namespace smartPhone { namespace NEW {
 
 		std::cout << "smartphone namespace NEW says '" << a << "'"  << '\n';
 		
-		::print(a);		// dont think that this will access globally
-						// THIS WILL CAUSE RECURSION
+		::print(a);	
 
 	}
 	void print_again()
@@ -52,6 +51,9 @@ void print(std::string a)
 
 int main()
 {
+
+ /*          1st TYPE           */		
+
 	/*namespace m = smartPhone::NEW;
 
 	m::print("Got it");
@@ -59,7 +61,7 @@ int main()
 	m::print_again();*/
 
 
-
+	/*          2nd TYPE           */
 
 
 	/*using smartPhone::NEW::print;
