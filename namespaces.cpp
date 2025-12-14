@@ -14,7 +14,8 @@ namespace smartPhone { namespace NEW {
 
 		std::cout << "smartphone namespace NEW says '" << a << "'"  << '\n';
 		
-		::print(a);		// here global function can be accessed by :: in prefix
+		print(a);		// dont think that this will access globally
+						// THIS WILL CAUSE RECURSION
 
 	}
 	void print_again()
