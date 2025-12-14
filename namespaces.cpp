@@ -3,6 +3,7 @@
 #include <string>
 
 
+void print(std::string a);
 
 
 namespace smartPhone { namespace NEW {
@@ -12,12 +13,15 @@ namespace smartPhone { namespace NEW {
 	{
 
 		std::cout << "smartphone namespace NEW says '" << a << "'"  << '\n';
+		
+		::print(a);		// here global function can be accessed by :: in prefix
 
 	}
 	void print_again()
 	{
 
 		std::cout << "smartphone namespace NEW says print_again"  << '\n';
+		
 
 	}
 
