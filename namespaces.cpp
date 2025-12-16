@@ -5,9 +5,44 @@
 
 void print(std::string a);
 
+// duplicates of namespace allowed
+
+namespace smartPhone {
+	namespace NEW {
+
+		int x{};
+	}
+
+}
+
+namespace smartPhone {
+	namespace NEW {
+
+		int b{};
+	}
+
+}
+
+namespace smartPhone {
+	namespace NEW {
+
+		int a{};
+
+		void print_msg()
+		{
+
+			std::cout << "smartphone namespace NEW says print_again" << '\n';
+
+
+		}
+
+	}
+
+}
+
+
 
 namespace smartPhone { namespace NEW {
-
 
 	void printer(std::string a)
 	{
