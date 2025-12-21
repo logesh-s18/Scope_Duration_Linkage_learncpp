@@ -11,8 +11,11 @@
 
 int main()
 {
+	// Namespace aliases
 
-	Logesh::old::printMyyName_L_o();
+	namespace demo = Logesh::old;
+
+	demo::printMyyName_L_o();
 
 
 }
