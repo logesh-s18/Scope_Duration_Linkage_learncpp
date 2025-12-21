@@ -130,11 +130,11 @@ void printMyName()
 namespace Logesh
 {
 
-	void printMyyyName_L()
+	void printMyName()
 	{
 		std::cout << "My name is Logesh from 'Logesh' namespace\n";
 		printMyName();
-
+		printMyName();
 	}
 
 	namespace old
@@ -142,7 +142,10 @@ namespace Logesh
 		void printMyyName_L_o()
 		{
 			std::cout << "My name is Logesh from 'Logesh->old' namespace\n";
+			::printMyName();
 			printMyName();
+			
+
 
 		}
 	}
@@ -153,7 +156,7 @@ namespace Logesh
 int main()
 {
 	
-	Logesh::printMyyyName_L();
+	Logesh::old::printMyyName_L_o();
 
 	
 
