@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Scope_Duration_Linkage_learncpp.com.vcxproj" />
+  <Project Path="Scope_Duration_Linkage_learncpp.com.vcxproj" Id="750b2171-4ece-40cc-812f-c2a213bc1638" />
 </Solution>
