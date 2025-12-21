@@ -42,6 +42,10 @@ namespace smartPhone {
 
 
 
+
+
+
+
 namespace smartPhone { namespace NEW {
 
 	void printer(std::string a)
@@ -116,8 +120,44 @@ void print(std::string a)
 
 }
 
+
+void printMyName()
+{
+	std::cout << "My name is Logesh from 'global' namespace\n";
+
+}
+
+namespace Logesh
+{
+
+	void printMyyyName_L()
+	{
+		std::cout << "My name is Logesh from 'Logesh' namespace\n";
+		printMyName();
+
+	}
+
+	namespace old
+	{
+		void printMyyName_L_o()
+		{
+			std::cout << "My name is Logesh from 'Logesh->old' namespace\n";
+			printMyName();
+
+		}
+	}
+
+}
+
+
 int main()
 {
+	
+	Logesh::printMyyyName_L();
+
+	
+
+
 
  /*          1st TYPE           */		
 
@@ -140,7 +180,7 @@ int main()
 	
 	
 	
-	namespace sP =  smartPhone::NEW;
+	//namespace sP =  smartPhone::NEW;
 
 	//smartWatch::print("HI");
 
@@ -154,7 +194,9 @@ int main()
 							// Trying Commit Push with GIT commands
 
 
-	sP::printer("Hi");
+	//sP::printer("Hi");
+
+
 
 
 }
