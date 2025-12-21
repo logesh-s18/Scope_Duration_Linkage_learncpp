@@ -143,7 +143,6 @@ namespace Logesh
 		{
 			std::cout << "My name is Logesh from 'Logesh->old' namespace\n";
 			::printMyName();
-			printMyName();
 			
 
 
@@ -197,53 +196,3 @@ namespace Logesh
 
 }
 
-int main()
-{
-	
-	Logesh::old::printMyyName_L_o();
-
-	
-
-
-
- /*          1st TYPE           */		
-
-	/*namespace m = smartPhone::NEW;
-
-	m::print("Got it");
-
-	m::print_again();*/
-
-
-	/*          2nd TYPE           */
-
-
-	/*using smartPhone::NEW::print;
-
-	print("Got it");
-
-	print_again();*/
-
-	
-	
-	
-	//namespace sP =  smartPhone::NEW;
-
-	//smartWatch::print("HI");
-
-	//::print("HI");			// we need to explicitly say to the compiler that we are accessing an 
-							// global function when it has duplicate names	
-							// if we just use just "print()", then compiler can't find which one
-							// byb default when there is no naming collision, then we dont need			
-							// to use :: for accessing global functions
-
-	
-							// Trying Commit Push with GIT commands
-
-
-	//sP::printer("Hi");
-
-
-
-
-}
