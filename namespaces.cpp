@@ -2,18 +2,27 @@
 #include <iostream>
 #include <string>
 
+#include "namespaces.h"
 
 void print(std::string a);
 
 
 int g_v = 6;
 
+extern int sharedVar;
+
+
 void NScppPrint()
 {
+	
 
 	std::cout << "namespace.cpp -- " << g_v << '\n';
+	std::cout << &sampleVar << '\n';
+	std::cout << sharedVar << '\n';
 
 }
+
+
 
 // duplicates of namespace allowed
 
