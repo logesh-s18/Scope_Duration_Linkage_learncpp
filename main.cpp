@@ -37,7 +37,7 @@ int main()
 
 
 	MAINcppPrint();
-	NScppPrint();
+	//NScppPrint();  this function is from namespace.h fwd dec. but we can't access bcz, the function was now "static"
 
 
 	return 0;
