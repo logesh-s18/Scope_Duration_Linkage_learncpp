@@ -4,15 +4,22 @@
 
 #include "namespaces.h"
 
+namespace {
+
+	//now whatever inside this UNNAMED namespace becomes INTERNAL LINKAGE
+	int g_var = 23; 
+	int sharedVar = 1111;
+
+}
 
 const int g_v = 1;  // by default it refers to internal linkage here. 
 
 int g_VAR = 1;  // by default it refers to external linkage here
 
-static int g_var = 23;  // it refers to internal linkage here
 
 
-int sharedVar = 17; //extern given in namespaces.cpp
+
+ //extern given in namespaces.cpp
 
 void gb()
 {
@@ -37,7 +44,7 @@ int main()
 
 
 	MAINcppPrint();
-	//NScppPrint();  this function is from namespace.h fwd dec. but we can't access bcz, the function was now "static"
+	NScppPrint(); 
 
 
 	return 0;

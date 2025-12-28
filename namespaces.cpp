@@ -9,10 +9,14 @@ void print(std::string a);
 
 int g_v = 6;
 
-extern int sharedVar;
+namespace
+{
+	//now whatever inside this UNNAMED namespace becomes INTERNAL LINKAGE
+	int sharedVar = 17;
+}
 
 
-static void NScppPrint()	// now this function is only accessible within this .cpp file, if another file tries to access this, it will fail even we use fwd dec
+ void NScppPrint()	
 {
 	
 
