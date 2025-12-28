@@ -5,6 +5,16 @@
 
 void print(std::string a);
 
+
+int g_v = 6;
+
+void NScppPrint()
+{
+
+	std::cout << "namespace.cpp -- " << g_v << '\n';
+
+}
+
 // duplicates of namespace allowed
 
 namespace smartPhone {

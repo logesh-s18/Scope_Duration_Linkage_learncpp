@@ -19,7 +19,7 @@ namespace Logesh
 
 }
 
-
+void NScppPrint();
 
 
 
