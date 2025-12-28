@@ -1,39 +1,57 @@
-# <learncpp.com> — 
+# LearnCpp.com — Notes
 
-Chapter <Scope, Duration, and Linkage: 
+## Chapter: Scope, Duration, and Linkage  
+### 7.6 – Internal Linkage
 
-
-<7.6 - Internal linkage>
-
-
-
-
+---
 
 ## New things I learned
 
-- extern var and function forward declaration are same behavior (diff with syntax which means, non-constant global variable declaration without extern keyword is not a "declaration". ITS A DEFINITION.)
-- static and const var are similar with linkage and its copies but different with their modify behavior
+- `extern` variables and function forward declarations have the **same conceptual behavior**:
+  both are **declarations without definitions**.  
+  The difference is only **syntax**, not linkage.
 
-## Example / Code I tried
-- available in GitHub commits
+- A **non-const global variable written without `extern` is NOT a declaration**.
+  It is a **definition**, even if no value is assigned.
 
+- Global `static` variables and global `const` variables behave **similarly with respect to linkage and copies**:
+  - both have **internal linkage**
+  - both create **separate copies per translation unit**
+  - they differ only in **mutability and intent**
 
+---
 
+## Examples / Code I tried
+
+- Available in GitHub commits for this chapter
+
+---
 
 ## Things that confused me
 
-- Internal Linkage and External Linkage with static and extern keywords
+- The difference between **internal linkage** and **external linkage**
+- How `static`, `extern`, and `const` affect visibility across multiple `.cpp` files
 
-
+---
 
 ## Important notes / rules
 
-- Functions, namespaces, non-constant global variables are by default External Linkage
-- const variables, static are by default Internal Linkage
+- Functions, namespaces, and **non-const global variables** have **external linkage by default**
+- `const` global variables and `static` global variables have **internal linkage by default**
+- Variables:
+  - `extern int x;` → declaration
+  - `int x;` (global scope) → definition
+- Functions:
+  - `void foo();` → declaration
+  - `void foo() {}` → definition
+- **One Definition Rule (ODR)**:
+  - A variable or function must have **exactly one definition**
+  - Declarations can appear multiple times
 
-
+---
 
 ## Quick summary (in my own words)
 
-- learned about use of static, extern, const with different files with namespaces
-
+- `extern` for variables works like forward declarations for functions
+- `static` and `const` isolate symbols to a single translation unit
+- Header files should usually contain **declarations**, not definitions
