@@ -6,21 +6,15 @@ const int sampleVar = 108;  // internal linkage - separate copies given to the .
 
 // int sampleVar = 108;  // this gives ODR vialoation as multiple def will happen if more files uses this header file, so the global var will get multiple def
 
-namespace Logesh
-{
-	namespace old
-	{
 
-		void printMyyName_L_o();
+extern int fee;
 
+extern const int ambulanceNumber;
 
+  // if u dont give static here, then ODR happen if many files includes this global var
 
-	}
+ int printVanakam();
 
-
-
-
-}
 
 void NScppPrint();
 
