@@ -169,58 +169,87 @@ ________________________________________________________________________________
 	• Internal means: each .cpp gets its own copy
 	• To SHARE a const global → extern is REQUIRED
 
-	🔥 MUST-FOLLOW RULE (VERY IMPORTANT):
-	------------------------------------
-	"ok nee const internal linkage nala,
-	 share panna extern kudukra,
-	 ana adha with definition-oda kudukaadha,
-	 1st const-aa .cpp-la define pannu,
-	 apram header-la extern potu share pannu —
-	 idhaan MUST FOLLOW rule, REMEMBER"
+	
+🔥 MUST-FOLLOW RULE (VERY IMPORTANT):
+------------------------------------
+"const global variables default-aa INTERNAL linkage irukkum.
+
+adhu multiple .cpp files-la share panna,
+HEADER-la 'extern' declaration podanum.
+
+adha define panra .cpp-la,
+andha header-ai MUST-aa include pannanum,
+so compiler 'extern'-ai definition-ukku munnaadi paakum.
+
+definition-oda 'extern' keyword use panna vendam.
+HEADER-la declaration,
+oru .cpp-la mattum definition — idhu dhaan correct pattern."
+
 
 - Translated -
-	Because const globals have internal linkage by default,
-	if you want to share them across files you must use extern.
-	But never use extern together with the definition.
-	First, define the const global in one .cpp file,
-	then declare it using extern in the header.
-	This rule must always be followed.
-	
-	Idhu correct. Idhu safe. Idhu best practice. Remember this !!!!!
+
+Global const variables have INTERNAL linkage by default.
+
+If you want to share a const global across multiple files,
+you must declare it using 'extern' in a header.
+
+The .cpp file that DEFINES the const
+must include that header,
+so the compiler sees the extern declaration
+before the definition.
+
+Do NOT use 'extern' together with the definition.
+Declare in the header, define in exactly one .cpp file.
+This rule must always be followed.
 
 
-	Correct pattern (ALWAYS USE THIS):
+✅ Correct Pattern (ALWAYS USE THIS)
 
-	SOURCE (.cpp)  → Definition
-	const int ambulanceNumber = 555;
+HEADER (.h) → Declaration
 
-	HEADER (.h)    → Declaration
-	extern const int ambulanceNumber;
+extern const int ambulanceNumber;
+
+
+SOURCE (.cpp) → Definition
+
+#include "namespaces.h"   // MUST
+
+const int ambulanceNumber = 555;
+
+
+📌 Order matters
+📌 Header is logically “first”, even if compiled separately
 
 
 	6) What NOT to do (DANGER ZONE)
 	-------------------------------
-	❌ extern const int ambulanceNumber = 555;  // in header
-	❌ extern + initializer together
+	// ❌ in header
+	extern const int ambulanceNumber = 555;
+	Why dangerous:
 
-	Reason:
-	• Initializer = definition
-	• Header included in multiple .cpp files
-	• Multiple definitions → ODR violation
+	initializer = definition
+
+	header included in many .cpp files
+
+	multiple definitions
+
+	💥 ODR violation
 
 
 	7) Headers vs Source files
 	--------------------------
 	• Headers → declarations only
 	• Source files → definitions only
-	• Never define globals in headers
+	• Never define shared globals in headers
+	⚠️ Exception:
+	inline constexpr (C++17+) is allowed in headers.
 
 
 	8) One-line takeaway (LOCK THIS)
 	--------------------------------
 	extern is for SHARING, not DEFINING.
-	const is private by default — extern makes it shared.
-	extern + definition = avoid always.
+	const globals are private by default — extern makes them shared.
+	extern + definition together = avoid.
 
 
 
@@ -256,6 +285,8 @@ ________________________________________________________________________________
 	✔ Declare in header:
 	  extern const int X;
 
+	  header must be included in defining .cpp
+
 	❌ Never put this in header:
 	  extern const int X = value;   // ODR bomb
 
@@ -265,5 +296,145 @@ ________________________________________________________________________________
 
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+																			 |
+																			 |
+### 7.9 — Inline functions and variables								     |
+																			 |
+------------------------------------------------------------------------------
+
+
+## New things I learned
+
+* inline is used for expanding the function body with cod in order to avoid func call everytime
+* inline is also used for giving internal linkage to func. 
+* within use of inline, we can fully define a function in header and use it within multiple .cpp files by #include which gives separate copies to each.
+* constexpr functions are implicitly inline but constexpr variables are NOT implicitly inline
+
+
+
+
+------------------------------------------------------------------------------
+
+## Important notes / rules
+
+* avoid defining inline func or extern constexpr defined in header. 
+  bcz, one change in that header will cause any .cpp files to recompile again whichever #include it which can cause to much time to compile and build.
+
+* inline um extern um single shared copy dhaan.
+modify panninaa ellaa edathulaiyum reflect aagum.
+
+multiple copies varradhu
+const global WITHOUT extern use pannina mattum.
+
+
+
+
+
+
+
+------------------------------------------------------------------------------
+
+## Things that confused me
+
+
+
+____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+																						|
+																						|
+### 7.10 — Sharing global constants across multiple files (using inline variables)		|
+																						|
+----------------------------------------------------------------------------------------
+
+
+## New things I learned
+
+Global constants as external variables:
+
+
+														constants.cpp:
+
+#include "constants.h"
+
+namespace constants
+{
+    extern constexpr double pi { 3.14159 };
+    extern constexpr double avogadro { 6.0221413e23 };
+    extern constexpr double myGravity { 9.2 }; // m/s^2 -- gravity is light on this planet
+}
+
+														constants.h:
+
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+namespace constants
+{
+    
+    extern const double pi;
+    extern const double avogadro;
+    extern const double myGravity;
+}
+
+#endif
+
+
+Use in the code file stays the same:
+
+														main.cpp:
+
+#include "constants.h" // include all the forward declarations
+
+#include <iostream>
+
+int main()
+{
+    std::cout << "Enter a radius: ";
+    double radius{};
+    std::cin >> radius;
+
+    std::cout << "The circumference is: " << 2 * radius * constants::pi << '\n';
+
+    return 0;
+}
+
+Advantages:
+
+* Works prior to C++17.
+* Only one copy of each variable is required.
+* Only requires recompilation of one file if the value of a constant changes.
+
+Disadvantages:
+
+* Forward declarations and variable definitions are in separate files, and must be kept in sync.
+* Variables not usable in constant expressions outside of the file in which they are defined.
+
+
+
+
+* Constexpr functions are implicitly inline
+
+
+
+------------------------------------------------------------------------------
+
+## Important notes / rules
+
+* IF you separate extern constexpr to define in .cpp, then if you want to share, to fwd dec 'const' only valid, constexpr wont work.
+  so if you want to share as constexpr value to other files, then u must define it in header.
+
+
+
+
+
+------------------------------------------------------------------------------
+
+## Things that confused me
+
+constexpr with .cpp and .h. constexpr only without defining will not work on constexpr.
+
+we use extern const for to give external linkage
+also, we give extern as a fwd dec when it is not deined for a variable.
+
+extern using not worked if the fwd declarfed .h is not included in same .cpp. so i can understand that we need to include .h within its .cpp too to share using "extern"
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
 ____________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
